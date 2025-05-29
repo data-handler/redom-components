@@ -1,0 +1,49 @@
+.demo {
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: var(--pico-border-radius);
+    margin-bottom: 0.5rem ! important;
+}
+
+pre .chapter {
+    font-weight: 600;
+    font-size: 0.75rem !important;
+    letter-spacing: .0625em;
+    text-transform: uppercase;
+}
+
+pre code {
+    padding-left: 0 !important;
+    /* font-size: 0.875rem; */
+}
+
+code.language-javascript {
+    font-size: 0.875rem !important;
+}
+
+.chapter>svg {
+    margin-right: 0.5rem;
+}
+
+/* Override Prism background */
+pre[class*="language-"],
+code[class*="language-"] {
+    background: inherit !important;
+}
+
+pre[class*="language-"] {
+    overflow-x: auto !important;
+    border-radius: var(--pico-border-radius) !important;
+    background: var(--pico-code-background-color) !important;
+    color: var(--pico-code-color) !important;
+    font-weight: var(--pico-font-weight) !important;
+    line-height: initial !important;
+    margin-top: 0 !important;
+}
