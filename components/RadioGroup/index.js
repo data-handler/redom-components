@@ -1,5 +1,5 @@
 import { el } from 'redom';
-import { LabelPosition } from './constants';
+import { LabelPosition } from '../constants';
 
 export default class RadopGroup {
     constructor({

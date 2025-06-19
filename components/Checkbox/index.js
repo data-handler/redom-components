@@ -1,5 +1,5 @@
 import { el } from 'redom';
-import { LabelPosition } from './constants.js';
+import { LabelPosition } from '../constants.js';
 
 export default class Checkbox {
     constructor({
