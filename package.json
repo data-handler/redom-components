@@ -1,24 +1,23 @@
 {
     "name": "redom-components",
     "version": "1.0.0",
-    "description": "",
-    "scripts": {
-        "start": "npm run clean && parcel demo.html --open",
-        "prebuild": "npm version patch",
-        "clean": "rmdir /S /Q dist || exit 0",
-        "build": "npm run clean && parcel build demo.html --no-scope-hoist --public-url /"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "description": "Lightweight, reusable UI components built with RE:DOM.",
+    "keywords": [
+        "redom",
+        "components",
+        "ui",
+        "web",
+        "frontend",
+        "javascript"
+    ],
+    "author": "Nick Adkinson",
+    "license": "MIT",
     "type": "module",
-    "devDependencies": {
-        "parcel": "^2.15.1",
-        "redom": "^4.3.0"
+    "main": "./index.js",
+    "exports": {
+        ".": "./index.js"
     },
     "dependencies": {
-        "@picocss/pico": "^2.1.1",
-        "lucide": "^0.511.0",
-        "prismjs": "^1.30.0"
+        "redom": "^4.3.0"
     }
 }
