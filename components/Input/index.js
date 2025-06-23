@@ -13,6 +13,10 @@ export default class Input {
         this.el.value = val;
     }
 
+    get hasValue() {
+        return this.el.value.trim().length > 0;
+    }
+
     get disabled() {
         return this.el.disabled;
     }
@@ -26,6 +30,18 @@ export default class Input {
 
     get readOnly() {
         return this.el.readOnly;
+    }
+
+    get name() {
+        return this.el.name;
+    }
+
+    get validity() {
+        return this.el.validity;
+    }
+
+    checkValidity() {
+        return this.el.checkValidity();
     }
 
     /**
@@ -53,6 +69,10 @@ export default class Input {
 
     focus() {
         this.el.focus();
+    }
+
+    select() {
+        this.el.select();
     }
 
     addEventListener(...args) {
