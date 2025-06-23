@@ -1,0 +1,14 @@
+.collapsible-radio-group .collapsible-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.collapsible-radio-group.expanded .collapsible-body {
+    max-height: 1000px;
+    /* large enough to show content */
+}
+
+.collapsible-radio-group .collapsible-body>.content {
+    padding: 0.5rem 0 0 0;
+}

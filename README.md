@@ -11,9 +11,9 @@ npm install redom-components
 ## Usage
 
 ```js
-import { Input } from 'redom-components';
+import { Input } from "redom-components";
 
-const input = new Input({ name: 'email', type: 'email', placeholder: 'Enter your email' });
+const input = new Input({ name: "email", type: "email", placeholder: "Enter your email" });
 ```
 
 ## Components
@@ -21,6 +21,7 @@ const input = new Input({ name: 'email', type: 'email', placeholder: 'Enter your
 - `Input` – Simple wrapper around an `<input>` element with helpful methods like `.value`, `.focus()`, `.reset()`, etc.
 - `Checkbox` – Checkbox input with flexible label placement (wrap or side-by-side).
 - `RadioGroup` – Grouped radio buttons with support for custom label layout.
+- `CollapsibleRadioGroup` – A yes/no radio group that conditionally reveals content when "Yes" (or optionally "No") is selected. Includes `.value`, `.reset()`, and event proxying.
 - `LabelPosition` – Enum constants for label positioning:
   - `LabelPosition.BEFORE`
   - `LabelPosition.AFTER`
