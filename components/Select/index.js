@@ -1,14 +1,27 @@
 import { el } from 'redom';
-import Option from '../Option'
+import Option from '../Option';
+import OptionGroup from '../OptionGroup';
 
 export default class Select {
     constructor(attrs = {}, options = []) {
         this.el = el('select', { ...attrs },
             options.map(opt => {
-                if (opt instanceof Option) return opt;
-                if (typeof opt === 'string') return new Option({ label: opt, value: opt });
+                if (opt instanceof Option || opt instanceof OptionGroup) {
+                    return opt;
+                }
+
+                // Handle optgroup-like structure
+                if (opt.label && Array.isArray(opt.options)) {
+                    return new OptionGroup(opt);
+                }
+
+                // Handle simple string or object
+                if (typeof opt === 'string') {
+                    return new Option({ value: opt, label: opt });
+                }
+
                 return new Option(opt);
-            }).map(opt => opt.el)
+            })
         );
     }
 
@@ -20,8 +33,12 @@ export default class Select {
         this.el.value = val;
     }
 
-    reset() {
-        this.el.selectedIndex = 0;
+    reset(full = false) {
+        if (full) {
+            this.el.innerHTML = '';
+        } else {
+            this.el.selectedIndex = 0;
+        }
     }
 
     focus() {
