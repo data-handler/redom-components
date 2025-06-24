@@ -1,8 +1,7 @@
 import { el, mount, unmount } from 'redom';
 import RadioGroup from '../RadioGroup';
-import './index.css';
 import { LabelPosition } from '../constants';
-
+import './index.css';
 
 export default class CollapsibleRadioGroup {
     constructor({
@@ -59,8 +58,6 @@ export default class CollapsibleRadioGroup {
         } else {
             this.hideContent();
         }
-
-        this.el.dispatchEvent(new CustomEvent('change', { detail: this.value }));
     }
 
     showContent() {

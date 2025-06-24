@@ -62,10 +62,15 @@ export default class Input {
         }
     }
 
-    reset() {
-        this.el.value = '';
-        this.el.removeAttribute('aria-invalid'); // optional: reset validation state
+    reset({ full = true } = {}) {
+        this.value = '';
+        this.ariaInvalid = null;
+        if (full) {
+            this.disabled = false;
+            this.readOnly = false;
+        }
     }
+
 
     focus() {
         this.el.focus();
