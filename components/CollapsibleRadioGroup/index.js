@@ -1,104 +1,69 @@
-import { el, mount, unmount } from 'redom';
+import { el } from 'redom';
 import RadioGroup from '../RadioGroup';
-import { LabelPosition } from '../constants';
-import './index.css';
+import { LabelPosition } from '../constants.js';
 
 export default class CollapsibleRadioGroup {
     constructor({
         name,
         label = '',
-        options = [],
         content,
-        required = false,
-        className = '',
-        invertTriggerValue = false,
-        labelPosition = LabelPosition.WRAP
+        defaultExpanded = false,
+        labelPosition = LabelPosition.AFTER,
+        options = [
+            { label: 'Collapse', value: 'no' },
+            { label: 'Expand', value: 'yes' }
+        ]
     }) {
-        this.name = name;
-        this.content = content;
-        this.invertTriggerValue = invertTriggerValue;
+        // auto-set checked based on defaultExpanded
+        const radios = options.map((opt, i) => ({
+            ...opt,
+            checked: defaultExpanded
+                ? i === 1  // second option checked if expanded
+                : i === 0  // first option checked if collapsed
+        }));
 
-        this.radioGroup = new RadioGroup({
+        this.radio = new RadioGroup({
             name,
-            required,
-            options,
             labelPosition,
-            className
+            options: radios
         });
 
-        this.body = el('.collapsible-body',
-            this.container = el('.content')
+        this.body = el('.collapsible-body', content);
+        this.header = el('.collapsible-header',
+            this.radio.el,
+            el('label.inline', { for: this.radio.inputs[1].id }, label)
         );
 
-        this.el = el('.input-container',
-            this.header = el('.collapsible-header',
-                this.radioGroup
-            ),
-            this.body,
-            el('label', { htmlFor: `${name}-group` }, label)
-        );
+        this.el = el('.collapsible', this.header, this.body);
+
+        this.body.style.maxHeight = defaultExpanded ? '10000px' : null;
     }
 
     onmount = () => {
-        this.radioGroup.addEventListener('change', this.onChange);
-    }
-
+        this.radio.addEventListener('change', this.toggle);
+    };
     onunmount = () => {
-        this.radioGroup.removeEventListener('change', this.onChange);
-        this.reset();
+        this.radio.removeEventListener('change', this.toggle);
+    };
+
+    toggle = () => {
+        const expanded = this.radio.value === 'yes';
+        this.body.style.maxHeight = expanded ? '10000px' : null;
+        this.el.dispatchEvent(new CustomEvent('toggle', {
+            bubbles: true,
+            detail: { expanded }
+        }));
+    };
+
+    get expanded() {
+        return this.radio.value === 'yes';
+    }
+    set expanded(val) {
+        this.radio.value = val ? 'yes' : 'no';
+        this.toggle();
     }
 
-    onChange = () => {
-        const isTrigger = this.invertTriggerValue
-            ? this.value !== 'true'
-            : this.value === 'true';
-
-        if (isTrigger) {
-            this.showContent();
-        } else {
-            this.hideContent();
-        }
-    }
-
-    showContent() {
-        console.log(`show contetnt ${this.content}`);
-        mount(this.container, this.content);
-        this.body.style.maxHeight = '10000px';
-    }
-
-    hideContent() {
-        console.log(`hide contetnt ${this.content}`);
-        this.body.style.maxHeight = null;
-        unmount(this.container, this.content);
-    }
-
-    reset() {
-        this.radioGroup.reset();
-        this.hideContent();
-    }
-
-    addEventListener(...args) {
-        this.el.addEventListener(...args);
-    }
-
-    removeEventListener(...args) {
-        this.el.removeEventListener(...args);
-    }
-
-    get value() {
-        return this.radioGroup.value;
-    }
-
-    set value(val) {
-        this.radioGroup.value = val;
-        this.onChange();
-    }
-
-    get disabled() {
-        return this.radioGroup.disabled;
-    }
-
-    set disabled(val) {
-        this.radioGroup.disabled = val;
-    }
+    addEventListener(...a) { this.el.addEventListener(...a); }
+    removeEventListener(...a) { this.el.removeEventListener(...a); }
+    dispatchEvent(...a) { return this.el.dispatchEvent(...a); }
 }

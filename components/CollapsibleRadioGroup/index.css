@@ -1,3 +1,15 @@
+.collapsible-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.collapsible-radio-group .collapsible-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .collapsible-radio-group .collapsible-body {
     max-height: 0;
     overflow: hidden;
@@ -6,7 +18,6 @@
 
 .collapsible-radio-group.expanded .collapsible-body {
     max-height: 1000px;
-    /* large enough to show content */
 }
 
 .collapsible-radio-group .collapsible-body>.content {
