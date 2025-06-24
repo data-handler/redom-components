@@ -10,8 +10,8 @@ export default class CollapsibleRadioGroup {
         defaultExpanded = false,
         labelPosition = LabelPosition.AFTER,
         options = [
-            { label: 'Collapse', value: 'no' },
-            { label: 'Expand', value: 'yes' }
+            { label: 'Collapse', value: 'false' },
+            { label: 'Expand', value: 'true' }
         ]
     }) {
         // auto-set checked based on defaultExpanded
@@ -30,8 +30,8 @@ export default class CollapsibleRadioGroup {
 
         this.body = el('.collapsible-body', content);
         this.header = el('.collapsible-header',
-            this.radio.el,
-            el('label.inline', { for: this.radio.inputs[1].id }, label)
+            el('label', label),
+            this.radio
         );
 
         this.el = el('.collapsible', this.header, this.body);
