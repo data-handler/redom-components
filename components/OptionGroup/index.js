@@ -1,7 +1,7 @@
 import { el } from "redom";
 import Option from '../Option';
 
-export class OptionGroup {
+export default class OptionGroup {
     constructor({ label, options = [] }) {
         this.el = el('optgroup', { label }, options.map(opt => {
             if (opt instanceof Option) return opt.el;
