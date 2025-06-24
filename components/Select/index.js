@@ -1,4 +1,4 @@
-import { el } from 'redom';
+import { el, setChildren } from 'redom';
 import Option from '../Option';
 import OptionGroup from '../OptionGroup';
 
@@ -35,7 +35,7 @@ export default class Select {
 
     reset(full = false) {
         if (full) {
-            this.el.innerHTML = '';
+            setChildren(this.el, []);
         } else {
             this.el.selectedIndex = 0;
         }

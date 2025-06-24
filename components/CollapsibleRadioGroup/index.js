@@ -61,11 +61,13 @@ export default class CollapsibleRadioGroup {
     }
 
     showContent() {
+        console.log(`show contetnt ${this.content}`);
         mount(this.container, this.content);
         this.body.style.maxHeight = '10000px';
     }
 
     hideContent() {
+        console.log(`hide contetnt ${this.content}`);
         this.body.style.maxHeight = null;
         unmount(this.container, this.content);
     }
