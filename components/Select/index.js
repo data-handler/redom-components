@@ -52,4 +52,8 @@ export default class Select {
     removeEventListener(...args) {
         this.el.removeEventListener(...args);
     }
+
+    dispatchEvent(...args) {
+        return this.el.dispatchEvent(...args);
+    }
 }

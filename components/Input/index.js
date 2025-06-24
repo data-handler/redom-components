@@ -87,4 +87,8 @@ export default class Input {
     removeEventListener(...args) {
         this.el.removeEventListener(...args);
     }
+
+    dispatchEvent(...args) {
+        return this.el.dispatchEvent(...args);
+    }
 }

@@ -46,6 +46,10 @@ export default class Checkbox {
         this.input.removeEventListener(...args);
     }
 
+    dispatchEvent(...args) {
+        return this.input.dispatchEvent(...args);
+    }
+
     onunmount = () => {
         this.input.checked = false;
     };
