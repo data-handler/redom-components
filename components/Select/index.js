@@ -33,6 +33,17 @@ export default class Select {
         this.el.value = val;
     }
 
+    /**
+     * @param {Boolean} val
+     */
+    set ariaInvalid(val) {
+        if (val) {
+            this.el.setAttribute('aria-invalid', 'true');
+        } else {
+            this.el.removeAttribute('aria-invalid');
+        }
+    }
+
     reset(full = false) {
         if (full) {
             setChildren(this.el, []);

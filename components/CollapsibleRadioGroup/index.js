@@ -8,19 +8,31 @@ export default class CollapsibleRadioGroup {
         label = '',
         content,
         defaultExpanded = false,
+        expandedValue = 'yes',
         labelPosition = LabelPosition.AFTER,
         options = [
-            { label: 'Collapse', value: 'false' },
-            { label: 'Expand', value: 'true' }
+            { label: 'Collapse', value: 'no' },
+            { label: 'Expand', value: 'yes' }
         ]
     }) {
-        // auto-set checked based on defaultExpanded
-        const radios = options.map((opt, i) => ({
+        // 1️⃣  ensure expandedValue is present
+        const hasExpanded = options.some(o => o.value === expandedValue);
+        if (!hasExpanded) {
+            console.warn(
+                `[CollapsibleRadioGroup] expandedValue "${expandedValue}" not found in options; using first option instead.`
+            );
+        }
+        const realExpandedValue = hasExpanded ? expandedValue : options[0].value;
+
+        // flag which option should be checked
+        const radios = options.map(opt => ({
             ...opt,
             checked: defaultExpanded
-                ? i === 1  // second option checked if expanded
-                : i === 0  // first option checked if collapsed
+                ? opt.value === realExpandedValue
+                : opt.value !== realExpandedValue
         }));
+
+        this.expandedValue = realExpandedValue;
 
         this.radio = new RadioGroup({
             name,
