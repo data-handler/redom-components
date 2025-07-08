@@ -1,6 +1,6 @@
 import { el } from "redom";
 
-export class MoneyInput {
+export default class MoneyInput {
     constructor({ name = "amount", placeholder = "0.00", decimals = 2 } = {}) {
         this.decimals = decimals;
         this.el = el("input", {
