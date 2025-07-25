@@ -1,6 +1,6 @@
 {
     "name": "redom-components",
-    "version": "1.0.15",
+    "version": "1.0.16",
     "description": "Lightweight, reusable UI components built with RE:DOM.",
     "keywords": [
         "redom",
@@ -19,5 +19,9 @@
     },
     "dependencies": {
         "redom": "^4.3.0"
-    }
+    },
+    "files": [
+        "index.js",
+        "components/"
+    ]
 }
