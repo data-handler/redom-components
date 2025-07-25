@@ -7,3 +7,4 @@ export { default as Select } from './components/Select/index.js';
 export { default as Option } from './components/Option/index.js';
 export { default as OptionGroup } from './components/OptionGroup/index.js';
 export { default as MoneyInput } from './components/MoneyInput/index.js';
+export { default as ConfirmationPopover } from './components/ConfirmationPopover/index.js';

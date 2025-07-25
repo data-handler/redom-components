@@ -1,0 +1,22 @@
+.confirm-popover {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 8px);
+    background: var(--background-color);
+    border: 1px solid var(--muted-border-color);
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    box-shadow: var(--card-box-shadow);
+    z-index: 999;
+}
+
+.confirm-popover p {
+    margin: 0 0 0.5rem 0;
+}
+
+.confirm-popover .actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
