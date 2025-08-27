@@ -28,7 +28,6 @@ export default class CollapsibleRadioGroup {
             const checked = defaultExpanded
                 ? opt.value === realExpandedValue
                 : opt.value !== realExpandedValue;
-            console.log('[CollapsibleRadioGroup] option', opt, 'checked:', checked);
             return {
                 ...opt,
                 checked
@@ -52,12 +51,10 @@ export default class CollapsibleRadioGroup {
         this.el = el('.collapsible', this.header, this.body);
 
         this.body.style.maxHeight = defaultExpanded ? '10000px' : null;
-        console.log('[CollapsibleRadioGroup] constructed, expandedValue:', this.expandedValue, 'defaultExpanded:', defaultExpanded, 'radio.value:', this.radio.value);
     }
 
     onmount = () => {
         this.radio.addEventListener('change', this.toggle);
-        console.log('[CollapsibleRadioGroup] onmount, initial radio.value:', this.radio.value);
     };
 
     onunmount = () => {
