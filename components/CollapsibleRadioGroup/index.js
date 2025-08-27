@@ -11,11 +11,10 @@ export default class CollapsibleRadioGroup {
         expandedValue = 'yes',
         labelPosition = LabelPosition.AFTER,
         options = [
-            { label: 'Collapse', value: 'no' },
-            { label: 'Expand', value: 'yes' }
+            { label: 'No', value: 'no' },
+            { label: 'Yes', value: 'yes' }
         ]
     }) {
-        // 1️⃣  ensure expandedValue is present
         const hasExpanded = options.some(o => o.value === expandedValue);
         if (!hasExpanded) {
             console.warn(
@@ -59,19 +58,19 @@ export default class CollapsibleRadioGroup {
     };
 
     toggle = () => {
-        const expanded = this.radio.value === 'yes';
-        this.body.style.maxHeight = expanded ? '10000px' : null;
+        this.body.style.maxHeight = this.expanded ? '10000px' : null;
         this.el.dispatchEvent(new CustomEvent('toggle', {
             bubbles: true,
-            detail: { expanded }
+            detail: { expanded: this.expanded }
         }));
     };
 
     get expanded() {
-        return this.radio.value === 'yes';
+        return this.radio.value === this.expandedValue;
     }
+
     set expanded(val) {
-        this.radio.value = val ? 'yes' : 'no';
+        this.radio.value = val ? this.expandedValue : 'no';
         this.toggle();
     }
 
