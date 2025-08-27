@@ -59,6 +59,7 @@ export default class CollapsibleRadioGroup {
         this.radio.addEventListener('change', this.toggle);
         console.log('[CollapsibleRadioGroup] onmount, initial radio.value:', this.radio.value);
     };
+
     onunmount = () => {
         this.radio.removeEventListener('change', this.toggle);
     };
@@ -74,12 +75,10 @@ export default class CollapsibleRadioGroup {
 
     get expanded() {
         const isExpanded = this.radio.value === this.expandedValue;
-        console.log('[CollapsibleRadioGroup] get expanded:', isExpanded, 'radio.value:', this.radio.value, 'expandedValue:', this.expandedValue);
         return isExpanded;
     }
 
     set expanded(val) {
-        console.log('[CollapsibleRadioGroup] set expanded:', val);
         this.radio.value = val ? this.expandedValue : 'no';
         this.toggle();
     }
