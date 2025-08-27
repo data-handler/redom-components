@@ -53,6 +53,12 @@ export default class CollapsibleRadioGroup {
 
     onmount = () => {
         this.radio.addEventListener('change', this.toggle);
+        // Set initial maxHeight for correct state
+        if (this.expanded) {
+            this.body.style.maxHeight = this.body.scrollHeight + 'px';
+        } else {
+            this.body.style.maxHeight = '0px';
+        }
     };
 
     onunmount = () => {
@@ -60,10 +66,11 @@ export default class CollapsibleRadioGroup {
     };
 
     toggle = () => {
+        // Smooth expand/collapse using scrollHeight
         if (this.expanded) {
-            this.el.classList.add('expanded');
+            this.body.style.maxHeight = this.body.scrollHeight + 'px';
         } else {
-            this.el.classList.remove('expanded');
+            this.body.style.maxHeight = '0px';
         }
         this.el.dispatchEvent(new CustomEvent('toggle', {
             bubbles: true,
