@@ -48,9 +48,7 @@ export default class CollapsibleRadioGroup {
             this.radio
         );
 
-        this.el = el('.collapsible', this.header, this.body);
-
-        this.body.style.maxHeight = defaultExpanded ? '10000px' : null;
+        this.el = el('.collapsible-radio-group', this.header, this.body);
     }
 
     onmount = () => {
@@ -62,8 +60,11 @@ export default class CollapsibleRadioGroup {
     };
 
     toggle = () => {
-        console.log('[CollapsibleRadioGroup] toggle called, radio.value:', this.radio.value, 'expandedValue:', this.expandedValue, 'expanded:', this.expanded);
-        this.body.style.maxHeight = this.expanded ? '10000px' : null;
+        if (this.expanded) {
+            this.el.classList.add('expanded');
+        } else {
+            this.el.classList.remove('expanded');
+        }
         this.el.dispatchEvent(new CustomEvent('toggle', {
             bubbles: true,
             detail: { expanded: this.expanded, value: this.radio.value }
