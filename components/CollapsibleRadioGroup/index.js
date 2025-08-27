@@ -87,4 +87,8 @@ export default class CollapsibleRadioGroup {
     addEventListener(...a) { this.el.addEventListener(...a); }
     removeEventListener(...a) { this.el.removeEventListener(...a); }
     dispatchEvent(...a) { return this.el.dispatchEvent(...a); }
+
+    get value() {
+        return this.radio.value;
+    }
 }
