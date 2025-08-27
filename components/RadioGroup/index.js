@@ -41,6 +41,7 @@ export default class RadopGroup {
                 checked,
                 id: `${name}-${value}`
             });
+            console.log('[RadioGroup] create input', { label, value, checked, inputChecked: input.checked });
 
             this.inputs.push(input);
 
@@ -74,12 +75,22 @@ export default class RadopGroup {
 
     get value() {
         const selected = this.inputs.find(input => input.checked);
-        return selected ? selected.value : null;
+        const val = selected ? selected.value : null;
+        console.log('[RadioGroup] get value:', val, 'inputs:', this.inputs.map(i => ({ value: i.value, checked: i.checked })));
+        return val;
     }
 
     set value(val) {
+        console.log('[RadioGroup] set value:', val);
         const target = this.inputs.find(input => input.value == val);
-        if (target) target.checked = true;
+        if (target) {
+            target.checked = true;
+            // Uncheck others
+            this.inputs.forEach(input => {
+                if (input !== target) input.checked = false;
+            });
+        }
+        console.log('[RadioGroup] after set value, inputs:', this.inputs.map(i => ({ value: i.value, checked: i.checked })));
     }
 
     get disabled() {

@@ -24,12 +24,16 @@ export default class CollapsibleRadioGroup {
         const realExpandedValue = hasExpanded ? expandedValue : options[0].value;
 
         // flag which option should be checked
-        const radios = options.map(opt => ({
-            ...opt,
-            checked: defaultExpanded
+        const radios = options.map(opt => {
+            const checked = defaultExpanded
                 ? opt.value === realExpandedValue
-                : opt.value !== realExpandedValue
-        }));
+                : opt.value !== realExpandedValue;
+            console.log('[CollapsibleRadioGroup] option', opt, 'checked:', checked);
+            return {
+                ...opt,
+                checked
+            };
+        });
 
         this.expandedValue = realExpandedValue;
 
@@ -48,28 +52,34 @@ export default class CollapsibleRadioGroup {
         this.el = el('.collapsible', this.header, this.body);
 
         this.body.style.maxHeight = defaultExpanded ? '10000px' : null;
+        console.log('[CollapsibleRadioGroup] constructed, expandedValue:', this.expandedValue, 'defaultExpanded:', defaultExpanded, 'radio.value:', this.radio.value);
     }
 
     onmount = () => {
         this.radio.addEventListener('change', this.toggle);
+        console.log('[CollapsibleRadioGroup] onmount, initial radio.value:', this.radio.value);
     };
     onunmount = () => {
         this.radio.removeEventListener('change', this.toggle);
     };
 
     toggle = () => {
+        console.log('[CollapsibleRadioGroup] toggle called, radio.value:', this.radio.value, 'expandedValue:', this.expandedValue, 'expanded:', this.expanded);
         this.body.style.maxHeight = this.expanded ? '10000px' : null;
         this.el.dispatchEvent(new CustomEvent('toggle', {
             bubbles: true,
-            detail: { expanded: this.expanded }
+            detail: { expanded: this.expanded, value: this.radio.value }
         }));
     };
 
     get expanded() {
-        return this.radio.value === this.expandedValue;
+        const isExpanded = this.radio.value === this.expandedValue;
+        console.log('[CollapsibleRadioGroup] get expanded:', isExpanded, 'radio.value:', this.radio.value, 'expandedValue:', this.expandedValue);
+        return isExpanded;
     }
 
     set expanded(val) {
+        console.log('[CollapsibleRadioGroup] set expanded:', val);
         this.radio.value = val ? this.expandedValue : 'no';
         this.toggle();
     }
