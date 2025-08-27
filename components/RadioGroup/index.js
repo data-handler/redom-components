@@ -41,7 +41,6 @@ export default class RadopGroup {
                 checked,
                 id: `${name}-${value}`
             });
-            console.log('[RadioGroup] create input', { label, value, checked, inputChecked: input.checked });
 
             this.inputs.push(input);
 
